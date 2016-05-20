@@ -57,6 +57,10 @@ public abstract class BaseModelManager<T, K> {
         return queryBuilder().where(whereCondition, condMore).count();
     }
 
+    public List<T> _list(WhereCondition whereCondition, WhereCondition... condMore) {
+        return dao.queryBuilder().where(whereCondition, condMore).list();
+    }
+
     public List<T> list(WhereCondition whereCondition, WhereCondition... condMore) {
         return queryBuilder().where(whereCondition, condMore).list();
     }

@@ -143,7 +143,7 @@ public class SettingFragment extends Fragment implements AdapterView.OnItemClick
     }
 
     private void showImportDialog() {
-        new AlertDialog.Builder(getActivity()).setTitle("选择全局词库").setSingleChoiceItems(AppEngine.dictLibNames, -1, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(getActivity()).setTitle("选择导入词库").setSingleChoiceItems(AppEngine.dictLibNames, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 currentImportName = AppEngine.dictLibNames[which];
@@ -160,7 +160,7 @@ public class SettingFragment extends Fragment implements AdapterView.OnItemClick
     }
 
     private void showExportDialog() {
-        new AlertDialog.Builder(getActivity()).setTitle("选择全局词库").setSingleChoiceItems(AppEngine.dictLibNames, -1, new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(getActivity()).setTitle("选择导出词库").setSingleChoiceItems(AppEngine.dictLibNames, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 currentExportName = AppEngine.dictLibNames[which];
@@ -169,7 +169,7 @@ public class SettingFragment extends Fragment implements AdapterView.OnItemClick
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 WhereCondition whereCondition = EasyDictWordsDao.Properties.Name_lib.eq(currentExportName);
-                List<EasyDictWords> tmp_list = EasyDictWordsManager.getInstance().list(whereCondition);
+                List<EasyDictWords> tmp_list = EasyDictWordsManager.getInstance()._list(whereCondition);
                 new ExportAsyncTask().execute(tmp_list, null, null);
 
             }

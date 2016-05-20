@@ -60,15 +60,19 @@ public class VerifyingFragment extends Fragment implements AdapterView.OnItemCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.activity_exam, container, false);
         initSubViews();
+        init();
         radioGroup.setOnCheckedChangeListener(mChangeRadio);
 
-
+        if (list.size() < 3) {
+            WinToast.toast(getActivity(), "当前词库单词不足测试,请导入词库!");
+        }
         return mainView;
     }
 
     private void init() {
         list.clear();
         list.addAll(EasyDictWordsManager.getInstance().list());
+
 
     }
 
@@ -94,9 +98,16 @@ public class VerifyingFragment extends Fragment implements AdapterView.OnItemCli
     private RadioGroup.OnCheckedChangeListener mChangeRadio = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
+            if (list.size() < 3) {
+                WinToast.toast(getActivity(), "当前词库单词不足测试,请导入词库!");
+                return;
+            }
+
             if (checkedId == radioButtons[arr[0]].getId()) {
-                WinToast.toast(getActivity(), "回答正确！请点击“下一题");
+                WinToast.toast(getActivity(), "回答正确!");
                 btn_next.setEnabled(true);
+            } else {
+                WinToast.toast(getActivity(), "回答错误!");
             }
         }
     };
